@@ -28,17 +28,18 @@ spec:
         imagePullPolicy: Always
         name: argocd-application-controller
         ports:
-        - containerPort: 8082
+        - name: metrics
+          containerPort: 8082
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 8082
+            port: metrics
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8082
+            port: metrics
           initialDelaySeconds: 5
           periodSeconds: 10
       serviceAccountName: argocd-application-controller
